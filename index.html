@@ -222,13 +222,13 @@
                 <div class="text-justify" style="display: flex; flex-direction: column; gap: 20px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 40px;">
                         <div style="flex: 1;">
-                            <p class="text-justify"><span class="circle-number">1</span> 
+                            <p class="text-left"><span class="circle-number">1</span> 
                                 <b>Access to fine-grained geometry.</b> 
                                 Enabling realistic placements requires geometry information beyond bounding boxes. 
                                 But how should geometric details be communicated to MLLMs? Prior works communicate bounding box parameters.
                             
                             </p>
-                            <p class="text-justify"> For instance,
+                            <p class="text-left"> For instance,
                                 <code>teddy bear on the chair != BBOX_OF[teddy bear] on BBOX_OF[chair]</code>.
                             </p> 
                         </div>
@@ -241,12 +241,12 @@
                             <img src="gifs/fig2_anim.gif" class="img-responsive" alt="Placeholder image 2">
                         </div>
                         <div style="flex: 1;">
-                            <p class="text-justify"><span class="circle-number">2</span> 
+                            <p class="text-right"><span class="circle-number">2</span> 
                                 <b>Contextual understanding of object instances.</b> 
                                 Objects that are placed into existing scenes need a way to tell different instances of 
                                 identical objects apart, using the context in which they appear.
                             </p>
-                            <p class="text-justify">
+                            <p class="text-right">
                                 The left chair's occupied. So we should put the bear on the right chair.
                             </p>
                         </div>
@@ -254,13 +254,13 @@
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center; gap: 40px;">
                         <div style="flex: 1;">
-                            <p class="text-justify"><span class="circle-number">3</span> 
+                            <p class="text-left"><span class="circle-number">3</span> 
                                 <b> Common-sense reasoning about placements. </b>
                                 Placements that satisfy geometric constraints may not satisfy common sense reasoning
                                 about what's aesthetic, accessible or functional. These are hard to communicate using 
                                 raw geometric constraints.
                              </p>
-                            <p class="text-justify">
+                            <p class="text-left">
                                 Of the 4 placements shown of a teddy bear on the chair, one of them makes the most "sense".
                                 You know because you can see them.
                             </p>
@@ -280,14 +280,27 @@
                     <b>FirePlace's Approach </b> 
                 </h3> 
 
-                <p>
+                <!-- <p>
                     FirePlace addresses these challenges by introducing a framework 
                     where multimodal LLMs can access geometric tools and constraint solvers
                     to produce geometrically feasible solutions and choose among these solutions
                     by rendering the placements, then pruning them according to plausibility.
-                </p>
+                </p> -->
 
-                <p>
+                <p class="text-justify">
+                    Given a 3D scene, an object, and a language input, FirePlace follows a 
+                    five-stage process: <b>(1)</b> an MLLM generates a list of potential constraints, 
+                    specifying relevant scene and object parts in natural language; <b>(2)</b> the 
+                    MLLM resolves these references using Batched Visual Selection, our method of scaling
+                    inference compute to improve MLLM visual reasoning (read more in the <a href="https://arxiv.org/abs/2503.04919">
+                    paper</a>!); <b>(3)</b> it calls geometric processing tools to extract 
+                    convex hulls of interaction surfaces, which are then refined using Batched 
+                    Visual Selection to ensure the right surfaces are used in the constraints; <b>(4)</b> mathematical 
+                    constraints are formed and solved to determine geometrically valid placements; 
+                    and <b>(5)</b> FirePlace renders these placements, selecting the best ones based 
+                    on softer criteria like aesthetics, functionality, and accessibility.
+
+<!-- 
                     Fireplace takes in a 3D scene, a 3D object, and a language input.
                     In stage 1, an MLLM generates a list of potential constraints, with 
                     natural language references to the parts of the scene objects and the
@@ -304,7 +317,7 @@
                     plausible placements using constraint solvers.
                     Finally, in stage 5, the system renders and selects among the geometrically feasible
                     placements based on visual reasoning about the softer aspects of placement, like
-                    aesthetics, functionality and accessibility.
+                    aesthetics, functionality and accessibility. -->
                 </p>
             </div>
         </div>
